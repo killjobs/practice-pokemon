@@ -22,20 +22,36 @@ const TYPE_COLOR = {
     "shadow" : "#F9BE00"};
 
 export const TypeColor = (pokemonType,level) => {
-    let colorSelected = "";
+    let colorSelected = {};
     let opacityColor = 0.4;
     let color = {};
 
     if(level === 0){
         colorSelected = TYPE_COLOR[pokemonType];
         color = {backgroundColor: colorSelected};
-    }else{
+    }else if(level === 1){
         colorSelected = TYPE_COLOR["default"];
         color = {backgroundColor: colorSelected,
                 opacity:opacityColor,
                 color:"#000",
                 fontWeight:"bolder"
             };
+    }else{
+        colorSelected = TYPE_COLOR[pokemonType];
+        color = {backgroundColor: colorSelected,
+                color:"#000",
+                fontWeight:"bolder"
+            };
     }
     return color;
 };
+
+export const ColorButton = () =>{
+    let buttonColor = {
+        backgroundColor: "rgb(0, 140, 227)",
+        color: "#fff",
+        borderRadius: "10px",
+        transition: "0.5s"
+    };
+    return buttonColor;
+}
