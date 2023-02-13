@@ -5,7 +5,6 @@ import { getPokemon } from "../Services/pokemonAppServices.js";
 
 const SimpleCardComponent = ({pokemonName, pokemonId}) =>{
     const [pokemon, setPokemon] = useState();
-    const mainLevel = 0;
     const typeLevel = 1;
     
     const UpdatePokemon = () =>{
@@ -16,8 +15,10 @@ const SimpleCardComponent = ({pokemonName, pokemonId}) =>{
 
     if(!pokemon) return null;
 
+    const mainColor = `simple-card ${pokemon.types[0].type.name}`;
+
     return(
-       <section className="simple-card" style={TypeColor(pokemon.types[0].type.name,mainLevel)}>
+       <section className={mainColor}>
             <h1>{pokemonName}</h1>
             <section>
                 <ul>

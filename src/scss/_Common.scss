@@ -1,6 +1,7 @@
 $white-color: #f9f9fa;
 $light-grey-color : #858b92;
 
+$type-default : "#FFF";
 $type-normal : #C2C2A1;
 $type-flying : #BAB0D5;
 $type-ghost : #735797;
@@ -37,3 +38,67 @@ $breakpoints: (
         @warn "El valor '#{ $breakpoint}' no ha sido declarado como breakpoint";
     }
 }
+
+.default{
+	background-color: $type-default;
+	}
+.normal{
+	background-color: $type-normal;
+	}
+.flying{
+	background-color: $type-flying;
+	}
+.ghost{
+	background-color: $type-ghost;
+	}
+.dark{
+	background-color: $type-dark;
+	}
+.steel{
+	background-color: $type-steel;
+	}
+.ground{
+	background-color: $type-ground;
+	}
+.poison{
+	background-color: $type-poison;
+	}
+.grass{
+	background-color: $type-grass;
+	}
+.fire{
+	background-color: $type-fire;
+	}
+.electric{
+	background-color: $type-electric;
+	}
+.fairy{
+	background-color: $type-fairy;
+	}
+.bug{
+	background-color: $type-bug;
+	}
+.fighting{
+	background-color: $type-fighting;
+	}
+.water{
+	background-color: $type-water;
+	}
+.psychic{
+	background-color: $type-psychic;
+	}
+.ice{
+	background-color: $type-ice;
+	}
+.rock{
+	background-color: $type-rock;
+	}
+.dragon{
+	background-color: $type-dragon;
+	}
+.unknown{
+	background-color: $type-unknown;
+	}
+.shadow{
+	background-color: $type-shadow;
+	}
