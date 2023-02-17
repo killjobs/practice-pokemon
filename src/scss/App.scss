@@ -1,6 +1,32 @@
-.App{
+@import "./Common.scss";
 
+.App{
+    width: 98%;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
     &_h1{
-        padding-left: 50px;
+        display: block;
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    form{
+        width: 60%;
+        background-color: $white-color;
+        position: fixed;
+        padding: 20px 0 20px 0;
+        top: 0;
+        right: 0;
+        @include media-up(md){
+            width: 80%;
+        }
+    }
+    .nextSection{
+        width: 80%;
+        height: 100px;
+        margin: 10px 0 20px 0;
     }
 }

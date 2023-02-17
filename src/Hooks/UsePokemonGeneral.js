@@ -1,11 +1,12 @@
 import {useState, useEffect} from "react";
 import {getPokemons} from "../Services/pokemonAppServices.js";
 
-export const UsePokemonGeneral = () =>{
+export const UsePokemonGeneral = (page, limit) =>{
     const [listPokemons, setListPokemons] = useState();
 
     const UpdateListPokemons = () =>{
-        getPokemons().then(res => setListPokemons(res));
+        const offset = page*limit;
+        getPokemons(offset, limit).then(res => setListPokemons(res));
     }
 
     useEffect(UpdateListPokemons,[]);

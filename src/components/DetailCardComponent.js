@@ -10,9 +10,9 @@ const DetailCardComponent = () => {
     const [pokemon, setPokemon] = useState();
     const [tab, setTab] = useState(false);
     const {id} = useParams();
-    var pokemonDetail = {};
-    var pokemonStatistics = {};
-    var pokemonColor = {};
+    let pokemonDetail = {};
+    let pokemonStatistics = {};
+    let pokemonColor = {};
 
     useEffect(()=>{
         getPokemon(id).then(res => setPokemon(res));
