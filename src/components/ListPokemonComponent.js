@@ -1,25 +1,30 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useCallback , useState, useEffect, useRef, useMemo} from "react";
 import SimpleCardComponent from './SimpleCardComponent.js';
 import { Link } from 'react-router-dom';
 import { getPokemons } from "../Services/pokemonAppServices.js";
+import useNearScreen from "../Hooks/UseNearScreen.js";
+import debounce from "just-debounce-it";
 
 const ListPokemonComponent = () =>{
     const INITIAL_PAGE = 0;
     const DEFAULT_OFFSET = 20;
+    const externalRef = useRef();
+    const {isNearScreen} = useNearScreen({
+            externalRef:externalRef,
+            once: false
+        });
     const [listPokemons, UpdateListPokemons] = useState(null);
     const [listAuxPokemon, UpdateListAuxPokemon] = useState(null);
     const [searchPokemon, setsearchPokemon] = useState('');
     const [page, setPage] = useState(INITIAL_PAGE);
-    const finalElementOnPage = useRef(null);
-    let searchValue = useRef(null);
+    
+    const totalPokemon = useMemo( () => {
+        return listPokemons
+    },[listAuxPokemon]);
+
+    console.log("useMemo: ",totalPokemon);
+
     let auxPokemon = [];
-    const observerPokemon = new IntersectionObserver((entry, observer)=>{
-        console.log(entry);
-    },{
-        root:null,
-        rootMargin: '0px 0px 0px 0px',
-        threshold: 1.0
-    });
 
     const UpdatePokemons = () =>{
         const offset = page * DEFAULT_OFFSET;
@@ -34,12 +39,11 @@ const ListPokemonComponent = () =>{
     useEffect(()=>{
         UpdatePokemons();
         setsearchPokemon('');
-        //if(finalElementOnPage.current) observerPokemon.observe(finalElementOnPage);
     }, [page]);
     
-    const UpdatePage = () => {
+    /*const UpdatePage = () => {
         setPage(page + 1);
-    }
+    }*/
 
     const SearchPokemon = (e) => {
         setsearchPokemon(e.target.value);
@@ -52,6 +56,14 @@ const ListPokemonComponent = () =>{
         console.log(newListPokemon);
         console.log(listAuxPokemon);
     }
+
+    const debounceHandleNextPage = useCallback(debounce(
+        () => setPage(page => page + 1), 200
+    ),[setPage]);
+
+    useEffect(function (){
+        if(isNearScreen) debounceHandleNextPage()
+    },[debounceHandleNextPage,isNearScreen])
 
     if(!listPokemons) return null;
 
@@ -81,8 +93,8 @@ const ListPokemonComponent = () =>{
             }
             
         )}
-        <div id='visor' ref={finalElementOnPage}></div>
-        <button className="nextSection" onClick={UpdatePage}>CARGAR SIGUIENTES</button>
+        <div ref={externalRef}></div>
+        {/*<button className="nextSection" onClick={UpdatePage}>CARGAR SIGUIENTES</button>*/}
         </>
     );
 };
